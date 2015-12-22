@@ -1,0 +1,29 @@
+{
+  "classes":
+  [
+    {"class": "Math 31A", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Math"},
+    {"class": "Math 31B", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Math"},
+    {"class": "Math 32A", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Math"},
+    {"class": "Math 32B", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Math"},
+    {"class": "Math 33A", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Math"},
+    {"class": "Math 170A", "term": "Fall", "major": "Varies", "category": "Math"},
+    {"class": "Stats 10", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Lower"},
+    {"class": "Stats 20", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "Lower"},
+    {"class": "Stats 100A", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "100"},
+    {"class": "Stats 100B", "term": ["Fall", "Winter", "Spring"], "major": "Required", "category": "100"},
+    {"class": "Stats 100C", "term": ["Fall", "Spring"], "major": "Required", "category": "100"},
+    {"class": "Stats 101A", "term": "Fall", "major": "Varies", "category": "101"},
+    {"class": "Stats 101B", "term": "Winter", "major": "Varies", "category": "101"},
+    {"class": "Stats 101C", "term": "Spring", "major": "Varies", "category": "101"},
+    {"class": "Stats 102A", "term": "Fall", "major": "Varies", "category": "102"},
+    {"class": "Stats 102B", "term": "Winter", "major": "Varies", "category": "102"},
+    {"class": "Stats 102C", "term": "Spring", "major": "Varies", "category": "102"},
+    {"class": "Stats 130", "term": ["Fall", "Spring"], "major": "Varies", "category": "Elective"},
+    {"class": "Stats 140SL", "term": ["Fall", "Winter"], "major": "Required", "category": "Consulting"},
+    {"class": "Stats 141SL", "term": ["Winter", "Spring"], "major": "Required", "category": "Consulting"},
+    {"class": "Stats C155", "term": "Winter", "major": "Elective", "category": "Elective"},
+    {"class": "Stats C161", "term": "Spring", "major": "Elective", "category": "Elective"},
+    {"class": "Stats 170", "term": "Spring", "major": "Elective", "category": "Elective"},
+    {"class": "Stats C180", "term": "Winter", "major": "Elective", "category": "Elective"}
+  ]
+}

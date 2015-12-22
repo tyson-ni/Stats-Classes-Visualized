@@ -1,0 +1,42 @@
+body {
+  width: 87.5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12.5%;
+  background-color: #fffff6;
+  color: #111;
+  max-width: 1400px;
+}
+
+svg {
+  height: 1000px;
+  width: 1000px;
+  background-color: #fffff0;
+  border: 1px solid gray;
+}
+
+circle {
+  opacity: 0.5;
+  stroke: none;
+}
+
+#mathNodesG {
+  fill: darkgreen;
+}
+
+#lowerNodesG, #seriesNodesG {
+  fill: darkblue;
+}
+
+#electiveNodesG {
+  fill: lightblue;
+}
+
+#consultingNodesG {
+  fill: darkorange;
+}
+
+.labels {
+  fill: navy;
+  font-size: 14;
+}

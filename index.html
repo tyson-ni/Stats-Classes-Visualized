@@ -1,0 +1,231 @@
+<html>
+<head>
+  <title>Stats Courses Overview</title>
+  <meta charset="utf-8" />
+  <script src="d3.min.js"></script>
+  <script src="queue.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+  <div id="viz">
+    <svg>
+    </svg>
+  </div>
+
+<script>
+
+queue()
+  .defer(d3.json, "classes.json")
+  .defer(d3.csv, "relations.csv")
+  .await(function(error, classes, relations) { createViz(classes.classes, relations) });
+
+
+function createViz(classes, relations) {
+
+
+  var mathNodes = classes.filter(function(d) { return d.category == "Math" });
+  var lowerNodes = classes.filter(function(d) { return d.category == "Lower" });
+  var _100Nodes = classes.filter(function(d) { return d.category == "100" });
+  var _101Nodes = classes.filter(function(d) { return d.category == "101" });
+  var _102Nodes = classes.filter(function(d) { return d.category == "102" });
+  var electiveNodes = classes.filter(function(d) { return d.category == "Elective" });
+  var consultingNodes = classes.filter(function(d) { return d.category == "Consulting" });
+  //
+  // var allNodes = [mathNodes, lowerNodes, _100Nodes, _101Nodes, _102Nodes, electiveNodes, consultingNodes];
+  // var categories = ["Math", "Lower", "100", "101", "102", "Elective", "Consulting"];
+
+  // var vizG = d3.select("svg")
+  //              .append("g")
+  //              .attr("id", "vizG")
+  //              .attr("transform", "translate(100, 300)");
+
+
+  // for (i in allNodes) {
+  //   setPositions(allNodes[i], allNodes[i][0].category);
+  // }
+  //
+  // var selected = vizG.selectAll("circle")
+  //                    .data(allNodes)
+  //                    .enter()
+  //                    .append("circle")
+  //                    .attr("r", 12);
+  // for (i in allNodes) {
+  //   selected.attr("cx", function(d) { return d[i].x })
+  //           .attr("cy", function(d) { return d[i].y });
+  // }
+  // vizG.selectAll("circle")
+  //     .data(allNodes)
+  //     .enter()
+  //     .append("circle")
+  //     .attr("r", 12)
+  //     .each(function(d) { console.log(d)});
+      // .attr("cx", function(d) { return d.x })
+      // .attr("cy", function(d) { return d.y });
+
+
+
+
+    var mathNodesG = d3.select("svg")
+                       .append("g")
+                       .attr("id", "mathNodesG")
+                       .attr("transform", "translate(200, 100)");
+    var lowerNodesG = d3.select("svg")
+                        .append("g")
+                        .attr("id", "lowerNodesG")
+                        .attr("transform", "translate(350, 100)");
+    var _100NodesG = d3.select("svg")
+                        .append("g")
+                        .attr("id", "seriesNodesG")
+                        .attr("transform", "translate(500, 100)");
+
+    var _101NodesG = d3.select("svg")
+                        .append("g")
+                        .attr("id", "seriesNodesG")
+                        .attr("transform", "translate(650, 100)");
+    var _102NodesG = d3.select("svg")
+                        .append("g")
+                        .attr("id", "seriesNodesG")
+                        .attr("transform", "translate(800, 100)");
+    var electiveNodesG = d3.select("svg")
+                           .append("g")
+                           .attr("id", "electiveNodesG")
+                           .attr("transform", "translate(300, 400)");
+    var consultingNodesG = d3.select("svg")
+                             .append("g")
+                             .attr("id", "consultingNodesG")
+                             .attr("transform", "translate(300, 500)");
+
+    addCircles(mathNodesG, mathNodes, "vert");
+    addCircles(lowerNodesG, lowerNodes, "vert");
+    addCircles(_100NodesG, _100Nodes, "vert");
+    addCircles(_101NodesG, _101Nodes, "vert");
+    addCircles(_102NodesG, _102Nodes, "vert");
+    addCircles(electiveNodesG, electiveNodes, "horiz");
+    addCircles(consultingNodesG, consultingNodes, "horiz");
+
+    function addCircles(nodesG, nodesData, orient) {
+      var circles = nodesG.selectAll("circle")
+            .data(nodesData)
+            .enter()
+            .append("circle")
+            .attr("r", 12)
+
+      if (orient == "vert") {
+        circles.attr("cy", function(d, i) { return i * 50 });
+      } else {
+        circles.attr("cx", function(d, i) { return i * 100 });
+      }
+    }
+
+    addLabels(mathNodesG, mathNodes, "vert");
+    addLabels(lowerNodesG, lowerNodes, "vert");
+    addLabels(_100NodesG, _100Nodes, "vert");
+    addLabels(_101NodesG, _101Nodes, "vert");
+    addLabels(_102NodesG, _102Nodes, "vert");
+    addLabels(electiveNodesG, electiveNodes, "horiz");
+    addLabels(consultingNodesG, consultingNodes, "horiz");
+
+    function addLabels(nodesG, nodesData, orient) {
+      var labels = nodesG.selectAll("text")
+                         .data(nodesData)
+                         .enter()
+                         .append("text")
+                         .text(function(d) { return d.class })
+                         .attr("class", "labels");
+      if (orient == "vert") {
+        labels.attr("y", function(d, i) { return i * 50 })
+              .attr("x", function(d) { return -80 });
+      } else {
+        labels.attr("x", function(d, i) { return i * 100 })
+              .attr("y", function(d) { return 50 });
+      }
+    }
+}
+
+  // function setPositions(nodes, category) {
+  //   if (category == "Math") {
+  //     var xPos = 200;
+  //   } else if (category == "Lower") {
+  //     var xPos = 350;
+  //   } else if (category == "100") {
+  //     var xPos = 500;
+  //   } else if (category == "101") {
+  //     var xPos = 650;
+  //   } else if (category == "102") {
+  //     var xPos = 800;
+  //   } else if (category == "Elective") {
+  //     var yPos = 400;
+  //   } else if (category == "Consulting") {
+  //     var yPos = 500;
+  //   }
+  //
+  //   for (i in nodes) {
+  //     if (!(category == "Elective" || category == "Consulting")) {
+  //       nodes[i].x = xPos;
+  //       nodes[i].y = parseInt(i) * 50;
+  //     } else {
+  //       nodes[i].x = parseInt(i) * 100;
+  //       nodes[i].y = yPos;
+  //     }
+  //   }
+  // }
+
+
+
+
+  // function createCircles(nodes) {
+  //   vizG.selectAll("circle")
+  //       .data(nodes)
+  //       .enter()
+  //       .append("circle")
+  //       .attr("r", 12)
+  //       .attr("cx", function(d) { return d.x })
+  //       .attr("cy", function(d) { return d.y });
+  // }
+
+  // function createLinks(edges, nodes) {
+  //   var nodeHash = {};
+  //   for (i in nodes) {
+  //     nodeHash[nodes[i].class] = nodes[i];
+  //   }
+  //   console.log(nodeHash);
+  //   for (i in edges) {
+  //     if (edges[i].requirement == "Enforced") {
+  //       edges[i].weight = 3;
+  //     } else if (edges[i].requirement == "Choice") {
+  //       edges[i].weight = 2;
+  //     } else {
+  //       edges[i].weight = 1;
+  //     }
+  //     edges[i].source = nodeHash[edges[i].source];
+  //     edges[i].target = nodeHash[edges[i].target];
+  //   }
+  //   console.log(edges);
+  //
+  //   d3.select("svg")
+  //     .selectAll("path")
+  //     .data(edges)
+  //     .enter()
+  //     .append("path")
+  //     .attr("d", makeLinks);
+  //
+  //   function makeLinks(d, i) {
+  //     var links = d3.svg.line()
+  //
+  //   }
+  //
+  // }
+  //
+  // createNodes(classes.classes);
+  // createLinks(relations, classes.classes);
+
+
+
+
+
+</script>
+</body>
+
+</html>
