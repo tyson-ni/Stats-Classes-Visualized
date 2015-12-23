@@ -3,7 +3,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding-left: 12.5%;
-  background-color: #fffff6;
+  background-color: white;
   color: #111;
   max-width: 1400px;
 }
@@ -11,32 +11,36 @@ body {
 svg {
   height: 1000px;
   width: 1000px;
-  background-color: #fffff0;
+  background-color: white;
   border: 1px solid gray;
 }
 
 circle {
-  opacity: 0.5;
   stroke: none;
 }
 
-#mathNodesG {
+.mathNodesG {
   fill: darkgreen;
 }
 
-#lowerNodesG, #seriesNodesG {
+.lowerNodesG, .seriesNodesG {
   fill: darkblue;
 }
 
-#electiveNodesG {
+.electiveNodesG {
   fill: lightblue;
 }
 
-#consultingNodesG {
+.consultingNodesG {
   fill: darkorange;
 }
 
-.labels {
-  fill: navy;
-  font-size: 14;
+text.labels {
+  fill: #283747;
+  font-size: 16;
+  font-family: Garamond
+}
+
+line.links {
+  opacity: 0.4;
 }
