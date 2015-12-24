@@ -19,23 +19,7 @@ circle {
   stroke: none;
 }
 
-.mathNodesG {
-  fill: darkgreen;
-}
-
-.lowerNodesG, .seriesNodesG {
-  fill: darkblue;
-}
-
-.electiveNodesG {
-  fill: lightblue;
-}
-
-.consultingNodesG {
-  fill: darkorange;
-}
-
-text.labels {
+text {
   fill: #283747;
   font-size: 16;
   font-family: Garamond

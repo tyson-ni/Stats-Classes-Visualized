@@ -1,4 +1,12 @@
 source,target,requirement
+Math 31A,Math 31B,Enforced
+Math 31A,Math 32A,Enforced
+Math 31B,Math 32B,Enforced
+Math 32A,Math 32B,Enforced
+Math 31B,Math 33A,Choice
+Math 32A,Math 33A,Choice
+Math 32B,Math 170A,Enforced
+Math 33A,Math 170A,Enforced
 Math 32B,Stats 100A,Enforced
 Math 33A,Stats 100A,Enforced
 Stats 100A,Stats 100B,Choice
