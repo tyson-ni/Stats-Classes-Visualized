@@ -21,10 +21,16 @@ circle {
 
 text {
   fill: #283747;
-  font-size: 16;
-  font-family: Garamond
+  font-size: 14;
+  font-family: PT Sans, Gill Sans, sans-serif;
 }
 
-line.links {
-  opacity: 0.4;
+text.notSelected {
+  fill: gray;
+  font-size: 16;
+}
+
+text.selected {
+  fill: steelblue;
+  font-size: 28;
 }
