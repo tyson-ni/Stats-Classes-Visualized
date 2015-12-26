@@ -1,5 +1,4 @@
-/*@import url(https://fonts.googleapis.com/css?family=PT+Sans);*/
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
 
 body {
   margin-left: 40px;
@@ -13,7 +12,7 @@ body {
 h1, h2 {
   font-weight: normal;
   margin-left: 120px;
-  color: #1A5276; /* stats red */
+  color: #CD6155; /* title blue */
 }
 
 h1 {
@@ -23,12 +22,15 @@ h1 {
 }
 
 h2 {
-  padding-left: 20px;
+  padding-left: 5px;
   font-size: 13px;
   margin-top: 10px;
+  color: #1A5276; /* title blue */
 }
 
-
+a {
+  color: inherit;
+}
 
 div#viz {
   width: 1100px;
@@ -55,7 +57,7 @@ text {
 }
 
 text.majorMinor {
-  fill:#2471A3; /* blue */
+  fill: #2E86C1; /* blue */
   font-size: 20px;
 }
 
@@ -65,12 +67,12 @@ text.notSelected {
 }
 
 text.selected {
-  fill: #2471A3; /* blue */
+  fill: #2E86C1; /* blue */
   font-size: 26px;
 }
 
 text.info_name {
-  fill: #2471A3; /* blue */
+  fill: #2E86C1; /* blue */
   font-size: 30px;
 }
 
