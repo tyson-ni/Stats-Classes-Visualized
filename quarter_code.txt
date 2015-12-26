@@ -1,0 +1,10 @@
+0: All quarters
+1: Fall only
+2: Winter only
+3: Spring only
+4: Fall, Winter
+5: Fall, Spring
+6: Fall, Summer
+7: Winter, Spring
+8: Fall, Winter, Summer
+9: Fall, Spring, Summer
