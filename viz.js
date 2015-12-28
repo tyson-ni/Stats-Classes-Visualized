@@ -8,7 +8,7 @@ queue()
 
 function dataViz(classes, relations) {
 
-  // define some attributes
+  /* define some attributes */
   var numMath = 5
   var numRequired = 11
   var numLower = 2
@@ -20,17 +20,21 @@ function dataViz(classes, relations) {
   var smallRadius = 14
   var bigRadius = 22
   var reqRadius = 16
-  var smallVerticalDist = 45
-  var bigVerticalDist = 70
-  var horizontalDist = 80
-  var horizontalY = 450
   var majorY = 700
   var mathColor = "#7DCEA0"
   var reqColor = "#CD6155"
   var electiveColor = "#E6B0AA"
   var consultingColor = "#EB984E"
-  var transitionDuration = 200
+  var transitionDuration = 100
   var categoryFont = "18px"
+  // set positions
+  var mathX = 150 // where to place math classes
+  var firstY = 150 // where to place the first row of vertical classes
+  var smallVerticalGap = 45 // vertical gap between math classes
+  var bigVerticalGap = 70 // vertical gap between other classes
+  var horizontalX = 200 // where to place the first column of horizontal classes
+  var horizontalY = 450 // where to place elective classes
+  var horizontalGap = 80 // horizontal gap
 
   /* determine where to place each class */
   setPositions(classes)
@@ -44,23 +48,15 @@ function dataViz(classes, relations) {
                .attr("id", function(d) { return "classes" + d.category })
                .attr("transform", function(d) {
                                    return "translate(" + d.x + "," + d.y + ")"
-                                 })
+                                  })
 
   /* create a g element to place quarter selectors */
   var quarterG = d3.select("svg")
                    .data(classes)
                    .append("g")
-                   .attr("id", "quarters")
                    .attr("transform", "translate(850, 60)")
 
-  /* create g element to display class info */
-  // var infoG = d3.select("svg")
-  //               .append("g")
-  //               .attr("id", "info")
-  //               .attr("transform", "translate(50, 50)")
-
-
-  /* hash class nodes */
+  /* hash class nodes: add relationship data into class data */
   var nodeHash = {}
   hashClasses()
 
@@ -69,49 +65,43 @@ function dataViz(classes, relations) {
   labelsScale = d3.scale.linear().domain(labelsExtent).range([-38, -65])
 
   /* create a circle for each class */
-  var circles = classG.append("circle")
-                    .attr("id", "classes")
-                    .attr("r", function(d) {
-                      if (d.category !== "Math") {
-                        return bigRadius
-                      } else {
-                        return smallRadius
-                      }
-                    })
-                    .attr("cx", 0)
-                    .attr("cy", 0)
-                    .style("fill", function(d) {
-                      if (d.category === "Math") {
-                        return mathColor
-                      } else if (d.category === "Elective") {
-                        return electiveColor
-                      } else if (d.category === "Consulting") {
-                        return consultingColor
-                      } else {
-                        return reqColor
-                      }
-                    })
+  classG.append("circle")
+        .attr("id", "classes")
+        .attr("r", function(d) { return (d.category !== "Math" ? bigRadius : smallRadius) })
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .style("fill", function(d) {
+                         if (d.category === "Math") {
+                           return mathColor
+                         } else if (d.category === "Elective") {
+                           return electiveColor
+                         } else if (d.category === "Consulting") {
+                           return consultingColor
+                         } else {
+                           return reqColor
+                         }
+                       })
                     .on("mouseover", mouseoverClass)
                     .on("mouseout", function(d, i) { mouseOut(d, i, "class") })
 
   /* create a label for each class */
-  var labels = classG.append("text")
-                  .attr("x", function(d) {
-                               if (d.category !== "Elective" && d.category !== "Consulting") {
-                                 return labelsScale(d.abbrev.length)
-                               } else {
-                                 return 0.25*labelsScale(d.abbrev.length)
-                               }
-                             })
-                  .attr("y", function(d) {
-                               if (d.category !== "Elective" && d.category !== "Consulting") {
-                                 return 0
-                               } else {
-                                 return 2*bigRadius
-                               }
-                             })
-                  .attr("id", "classLabels")
-                  .text(function(d) { return d.abbrev })
+  classG.append("text")
+        .attr("x", function(d) {
+                     if (d.category !== "Elective" && d.category !== "Consulting") {
+                       return labelsScale(d.abbrev.length)
+                     } else {
+                       return 0.25*labelsScale(d.abbrev.length)
+                     }
+                   })
+        .attr("y", function(d) {
+                     if (d.category !== "Elective" && d.category !== "Consulting") {
+                       return 0
+                     } else {
+                       return 2*bigRadius
+                     }
+                   })
+        .attr("id", "classLabels")
+        .text(function(d) { return d.abbrev })
 
   /* create a label for each category */
   d3.select("g#classesMath")
@@ -170,15 +160,13 @@ function dataViz(classes, relations) {
   .text("Consulting")
   .style("font-size", categoryFont)
 
-  /* create viz-es of major and minor requirements */
+  /* create visuals of major and minor requirements */
   var majorReqG = d3.select("svg")
-               .append("g")
-               .attr("id", "majorReqs")
-               .attr("transform", "translate(0," + majorY + ")")
+                    .append("g")
+                    .attr("transform", "translate(0," + majorY + ")")
   var minorReqG = d3.select("svg")
-               .append("g")
-               .attr("id", "minorReqs")
-               .attr("transform", "translate(0," + parseInt(majorY + 60) + ")")
+                    .append("g")
+                    .attr("transform", "translate(0," + parseInt(majorY + 60) + ")")
 
   makeReqsViz(majorReqG, 5, 11, 2, 2)
   makeReqsViz(minorReqG, 5, 8, 1, 0)
@@ -188,7 +176,6 @@ function dataViz(classes, relations) {
           .attr("x", 50)
           .attr("y", 5)
           .attr("class", "majorMinor")
-
 
   minorReqG.append("text")
           .text("Minor")
@@ -239,7 +226,60 @@ function dataViz(classes, relations) {
                             d3.select(this).attr("class", "notSelected")
                           })
 
-  /* implement: create viz-es of major and minor requirements */
+  /* implement: determine where to place each class */
+  function setPositions(nodes) {
+    // determine positions
+    for (i in nodes) {
+        if (nodes[i].category === "Math") {
+          nodes[i].x = mathX
+          nodes[i].y = firstY + i * smallVerticalGap
+        } else if (nodes[i].category === "Lower") {
+          nodes[i].x = mathX*2
+          nodes[i].y = firstY + (i-numMath) * bigVerticalGap
+        } else if (nodes[i].category === "100") {
+          nodes[i].x = mathX*3
+          nodes[i].y = firstY + (i-(numMath+numLower)) * 70
+        } else if (nodes[i].category === "101") {
+          nodes[i].x = mathX*4
+          nodes[i].y = firstY + (i-(numMath+numLower+num100)) * bigVerticalGap
+        } else if (nodes[i].category === "102") {
+          nodes[i].x = mathX*5
+          nodes[i].y = firstY + (i-(numMath+numLower+num100+num101)) * bigVerticalGap
+        } else if (nodes[i].category === "Elective") {
+          nodes[i].x = horizontalX + (i-(numMath+numRequired)) * horizontalGap
+          nodes[i].y = horizontalY
+        } else if (nodes[i].category === "Consulting") {
+          nodes[i].x = horizontalX + (i-(numMath+numRequired+numElective)) * horizontalGap
+          nodes[i].y = horizontalY + 100
+        }
+      }
+  }
+
+  /* implement: hash class nodes: add relationship data into class data */
+  function hashClasses() {
+    for (i in classes) {
+      nodeHash[classes[i].class] = classes[i]
+    }
+    for (i in relations) {
+      relations[i].source = nodeHash[relations[i].source]
+      relations[i].target = nodeHash[relations[i].target]
+    }
+  }
+
+  /* implement: get prereqs of a class */
+  function getRelations(d, i) {
+    var links = []
+    var linksCount = 0
+    for (i in relations) {
+      if (nodeHash[d.class] === relations[i].target) {
+        links[linksCount] = relations[i]
+        linksCount++
+      }
+    }
+    return links
+  }
+
+  /* implement: create visuals of major and minor requirements */
   function makeReqsViz(G, numMath, numRequired, numElective, numConsulting) {
     for (var i = 0; i < numMath; i++) {
       G.append("circle")
@@ -274,7 +314,6 @@ function dataViz(classes, relations) {
                .attr("cy", 0)
                .style("fill", consultingColor)
     }
-
   }
 
   /* implement: create animation when mouse is over a class */
@@ -301,6 +340,7 @@ function dataViz(classes, relations) {
                                         console.log("More than 3 prereqs!")
                                       }
                                   })
+
     var selectKeep = classG.filter(function(p) {
                                       if (linksCount === 0) {
                                         return p.class === d.class
@@ -320,10 +360,6 @@ function dataViz(classes, relations) {
                                         console.log("More than 3 prereqs!")
                                       }
                                    })
-    selectHide.selectAll("circle")
-                .transition()
-                .duration(transitionDuration)
-                .style("opacity", 0)
 
     var allCategories = [ "classesMath", "classesLower", "classes100", "classes101",
                 "classes102", "classesElective", "classesConsulting"]
@@ -332,8 +368,12 @@ function dataViz(classes, relations) {
     for (var i = 0; i < selectKeep[0].length; i++) {
       keepTheseCategories[i] = selectKeep[0][i].id
     }
-
     var hideTheseCategories = allCategories.filter(function(x) { return keepTheseCategories.indexOf(x) < 0 })
+
+    selectHide.selectAll("circle")
+                .transition()
+                .duration(transitionDuration)
+                .style("opacity", 0)
 
     selectSelf.select("circle")
               .transition()
@@ -404,7 +444,6 @@ function dataViz(classes, relations) {
         .duration(transitionDuration)
         .style("opacity", 1)
 
-
     selectSelf.select("circle#classes")
               .transition()
               .duration(transitionDuration)
@@ -437,65 +476,6 @@ function dataViz(classes, relations) {
                 .duration(transitionDuration)
                 .style("opacity", 0)
     }
-  }
-
-  /* implement: determine where to place each class */
-  function setPositions(nodes) {
-    for (i in nodes) {
-        if (nodes[i].category === "Math") {
-          nodes[i].x = 150
-          nodes[i].y = 150 + i * smallVerticalDist
-        } else if (nodes[i].category === "Lower") {
-          nodes[i].x = 300
-          nodes[i].y = 150 + (i-numMath) * bigVerticalDist
-        } else if (nodes[i].category === "100") {
-          nodes[i].x = 450
-          nodes[i].y = 150 + (i-(numMath+numLower)) * 70
-        } else if (nodes[i].category === "101") {
-          nodes[i].x = 600
-          nodes[i].y = 150 + (i-(numMath+numLower+num100)) * bigVerticalDist
-        } else if (nodes[i].category === "102") {
-          nodes[i].x = 750
-          nodes[i].y = 150 + (i-(numMath+numLower+num100+num101)) * bigVerticalDist
-        } else if (nodes[i].category === "Elective") {
-          nodes[i].x = 200 + (i-(numMath+numRequired)) * horizontalDist
-          nodes[i].y = horizontalY
-        } else if (nodes[i].category === "Consulting") {
-          nodes[i].x = 200 + (i-(numMath+numRequired+numElective)) * horizontalDist
-          nodes[i].y = horizontalY + 100
-        }
-      }
-  }
-
-  /* implement: hash class nodes */
-  function hashClasses() {
-    for (i in classes) {
-      nodeHash[classes[i].class] = classes[i]
-    }
-    for (i in relations) {
-      if (relations[i].requirement === "Enforced") {
-        relations[i].weight = 2.5
-      } else if (relations[i].requirement === "Choice") {
-        relations[i].weight = 1.5
-      } else {
-        relations[i].weight = 1
-      }
-      relations[i].source = nodeHash[relations[i].source]
-      relations[i].target = nodeHash[relations[i].target]
-    }
-  }
-
-  /* implement: get prereqs of a class */
-  function getRelations(d, i) {
-    var links = []
-    var linksCount = 0
-    for (i in relations) {
-      if (nodeHash[d.class] === relations[i].target) {
-        links[linksCount] = relations[i]
-        linksCount++
-      }
-    }
-    return links
   }
 
 }
