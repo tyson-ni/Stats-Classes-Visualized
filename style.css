@@ -4,7 +4,7 @@ body {
   margin-left: 40px;
   margin-right: 40px;
   margin-bottom: 100px;
-  background-color: white; /* off-white */
+  background-color: white;
   color: #111;
   font-family: PT Sans, Gill Sans, sans-serif;
 }
@@ -12,18 +12,18 @@ body {
 h1, h2 {
   font-weight: normal;
   margin-left: 120px;
-  color: #CD6155; /* title blue */
 }
 
 h1 {
   font-size: 55px;
   margin-top: 25px;
   margin-bottom: 10px;
+  color: #CD6155; /* stats red */
 }
 
 h2 {
   padding-left: 5px;
-  font-size: 13px;
+  font-size: 20px;
   margin-top: 10px;
   color: #1A5276; /* title blue */
 }
@@ -43,8 +43,8 @@ svg {
   display: block;
   height: 800px;
   width: 960px;
-  background-color: #fffff8;
-  border: 0.5px solid #CD6155; /* stats red */
+  background-color: #fffff6; /* off white */
+  border: none;
 }
 
 circle {
