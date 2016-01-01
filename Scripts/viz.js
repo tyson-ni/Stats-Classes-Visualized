@@ -1,9 +1,9 @@
 d3.select("div#viz").append("svg")
 
 queue()
-  .defer(d3.json, "classes.json")
-  .defer(d3.csv, "relations.csv")
-  .await(function(error, classes, relations) { dataViz(classes.all, relations) });
+  .defer(d3.json, "Data/classes.json")
+  .defer(d3.csv, "Data/relations.csv")
+  .await(function(error, classes, relations) { dataViz(classes, relations) });
 
 
 function dataViz(classes, relations) {
@@ -20,12 +20,13 @@ function dataViz(classes, relations) {
   var smallRadius = 14
   var bigRadius = 22
   var reqRadius = 16
-  var majorY = 700
+  var majorY = 750 // where to place major reqs
   var mathColor = "#7DCEA0"
   var reqColor = "#CD6155"
   var electiveColor = "#E6B0AA"
   var consultingColor = "#EB984E"
-  var transitionDuration = 100
+  var transitionInDuration = 250
+  var transitionOutDuration = 150
   var categoryFont = "18px"
   // set positions
   var mathX = 150 // where to place math classes
@@ -35,6 +36,9 @@ function dataViz(classes, relations) {
   var horizontalX = 200 // where to place the first column of horizontal classes
   var horizontalY = 450 // where to place elective classes
   var horizontalGap = 80 // horizontal gap
+  var reqGap = 70 // gap between major and minor reqs
+  var quarterX = 870 // where to place quarter selectors
+  var quarterY = 50
 
   /* determine where to place each class */
   setPositions(classes)
@@ -54,7 +58,7 @@ function dataViz(classes, relations) {
   var quarterG = d3.select("svg")
                    .data(classes)
                    .append("g")
-                   .attr("transform", "translate(850, 60)")
+                   .attr("transform", "translate(" + quarterX + "," + quarterY + ")")
 
   /* hash class nodes: add relationship data into class data */
   var nodeHash = {}
@@ -166,7 +170,7 @@ function dataViz(classes, relations) {
                     .attr("transform", "translate(0," + majorY + ")")
   var minorReqG = d3.select("svg")
                     .append("g")
-                    .attr("transform", "translate(0," + parseInt(majorY + 60) + ")")
+                    .attr("transform", "translate(0," + parseInt(majorY + reqGap) + ")")
 
   makeReqsViz(majorReqG, 5, 11, 2, 2)
   makeReqsViz(minorReqG, 5, 8, 1, 0)
@@ -296,6 +300,17 @@ function dataViz(classes, relations) {
                .attr("cx", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
                .attr("cy", 0)
                .style("fill", reqColor)
+      if (i == (numRequired-1)) {
+        G.append("text")
+         .attr("class", "reqNumLabel")
+         .attr("x", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
+         .attr("dx", function(d) { return numRequired >= 10 ?
+                                            (-1/2*numRequired) :
+                                            (-1/2.5*numRequired)
+                                 })
+         .attr("y", -20)
+         .text(numRequired)
+      }
     }
 
     for (var i = 0; i < numElective; i++) {
@@ -372,12 +387,12 @@ function dataViz(classes, relations) {
 
     selectHide.selectAll("circle")
                 .transition()
-                .duration(transitionDuration)
+                .duration(transitionInDuration)
                 .style("opacity", 0)
 
     selectSelf.select("circle")
               .transition()
-              .duration(transitionDuration)
+              .duration(transitionInDuration)
               .style("stroke", "gray")
               .style("stroke-width", function(p) {
                                        if (p.category !== "Math") {
@@ -389,20 +404,20 @@ function dataViz(classes, relations) {
 
     selectHide.selectAll("text#classLabels")
                 .transition()
-                .duration(transitionDuration)
+                .duration(transitionInDuration)
                 .style("opacity", 0)
 
     for (var i = 0; i < hideTheseCategories.length; i++) {
       d3.select("g#" + hideTheseCategories[i])
         .select("text#categoryLabels")
         .transition()
-        .duration(transitionDuration)
+        .duration(transitionInDuration)
         .style("opacity", 0)
     }
 
     d3.selectAll("g#quarters")
       .transition()
-      .duration(transitionDuration)
+      .duration(transitionInDuration)
       .style("opacity", 0)
 
     d3.select("svg")
@@ -431,7 +446,7 @@ function dataViz(classes, relations) {
       var selectSelf = classG.filter(function(p) { return p.class === d.class })
       d3.selectAll("g#quarters")
         .transition()
-        .duration(transitionDuration)
+        .duration(transitionOutDuration)
         .style("opacity", 1)
       d3.select("g#info")
         .remove()
@@ -441,22 +456,22 @@ function dataViz(classes, relations) {
 
     classG.selectAll("circle#classes")
         .transition()
-        .duration(transitionDuration)
+        .duration(transitionOutDuration)
         .style("opacity", 1)
 
     selectSelf.select("circle#classes")
               .transition()
-              .duration(transitionDuration)
+              .duration(transitionOutDuration)
               .style("stroke", "none")
 
     classG.selectAll("text#classLabels")
         .transition()
-        .duration(transitionDuration)
+        .duration(transitionOutDuration)
         .style("opacity", 1)
 
     d3.selectAll("text#categoryLabels")
       .transition()
-      .duration(transitionDuration)
+      .duration(transitionOutDuration)
       .style("opacity", 1)
   }
 
@@ -468,12 +483,12 @@ function dataViz(classes, relations) {
       var selectHide = classG.filter(function(p) { return selection.indexOf(p.term) < 0 && p.term !== 0 })
       selectHide.selectAll("circle")
                   .transition()
-                  .duration(transitionDuration)
+                  .duration(transitionInDuration)
                   .style("opacity", 0)
 
       selectHide.selectAll("text#classLabels")
                 .transition()
-                .duration(transitionDuration)
+                .duration(transitionInDuration)
                 .style("opacity", 0)
     }
   }
