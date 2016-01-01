@@ -3,18 +3,84 @@
 <head>
   <title>Visualizing UCLA Stats</title>
   <meta charset="utf-8" />
-  <script src="d3.min.js"></script>
-  <script src="queue.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <script src="Scripts/d3.min.js"></script>
+  <script src="Scripts/queue.js"></script>
+  <link href="Style/bootstrap.min.css" rel="stylesheet"/>
+  <link href="Style/style.css" rel="stylesheet"/>
 </head>
 
 
 <body>
   <h1>Pick Your Stats ...</h1>
   <h2>An interactive overview of the Stats program @ UCLA</h2>
+
   <div id="viz">
   </div>
-  <script src="viz.js"></script>
+  <script src="Scripts/viz.js"></script>
+
+  <div id="programInfo" class="container">
+
+    <h2 class="requirements"> Navigating the Stats program </h2>
+
+    <div class="row requirements">
+      <div class="col-md-6">
+        <h3><strong >Major: </strong></h3>
+        <ul>
+          <li>Math 31 AB, 32 AB & 33 A</li>
+          <li>Stats 10</li>
+          <li>Stats 20</li>
+          <li>Stats 100 ABC</li>
+          <li>Stats 101 ABC</li>
+          <li>Stats 102 ABC</li>
+          <li>2 Electives</li>
+          <li>2 Consulting: Stats 140SL & 141SL</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h3><strong>Minor:</strong></h3>
+        <ul>
+          <li> Math 31B </li>
+            <ul>
+              <li id="mathExplained"> In reality, other math classes are necessary since they are the prerequisites for many upper div classes </li>
+            </ul>
+          <li>6 classes from 100, 101 or 102 sequences</li>
+            <ul>
+              <li> Option I: Pick any 2 sequences </li>
+              <li> Option II: Pick 2 classes from each sequence </li>
+            </ul>
+          <li>1 Elective</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3><strong>Electives Explained:</strong></h3>
+          <ul>
+            <li> Pick any upper division stats class </li>
+            <li> These classes can also be selected: Math 131A, 131B, 151A, 151B, 170B, 171, 172A, 172B </li>
+            <li> Stats 105 & 189 do not count </li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3><strong>Recommended classes for students planning to study stats in grad school:</strong></h3>
+          <ul>
+            <li> Math 131A, 131B, 151A, 151B, 170B, 171 </li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3><strong> Official references: </strong></h3>
+      </div>
+    </div>
+
+  </div>
+
 </body>
 
 </html>
