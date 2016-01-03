@@ -1,21 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans);
 
 body {
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 100px;
+  margin-left, margin-right, margin-bottom: 50px;
   background-color: white;
   color: #111;
-  font-family: PT Sans, Gill Sans, sans-serif;
-}
-
-h1, h2, p {
+  font-family: PT Sans, Arial, sans-serif;
   font-weight: normal;
-  margin-left: 120px;
 }
 
 h1 {
   font-size: 55px;
+  margin-left: 120px;
   margin-top: 25px;
   margin-bottom: 10px;
   color: #CD6155; /* stats red */
@@ -23,17 +18,15 @@ h1 {
 
 h2 {
   font-size: 32px;
+  margin-left: 50px;
   margin-top: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   color: #1A5276; /* title blue */
 }
 
-a {
-  color: inherit;
-}
 
-div#viz {
-  width: 1100px;
+div {
+  width: 1000px;
   margin: auto;
   display: block;
 }
@@ -41,10 +34,18 @@ div#viz {
 svg {
   margin: auto;
   display: block;
-  height: 900px;
   width: 960px;
-  background-color: #fffff6; /* off white */
   border: none;
+}
+
+svg#classViz {
+  height: 650px;
+  background-color: #fffff6; /* off white */
+}
+
+svg#reqViz {
+  height: 170px;
+  background-color: white;
 }
 
 circle {
@@ -86,7 +87,7 @@ text.reqNumLabel {
 }
 
 h2.requirements {
-  margin-top: 60px;
+  padding-top: 40px;
 }
 
 div.row {
@@ -94,6 +95,11 @@ div.row {
   margin-right: 120px;
   margin-bottom: 30px;
 }
+
+div.requirements {
+  padding-top: 20px;
+}
+
 
 ul {
   font-size: 20px;
@@ -104,6 +110,15 @@ li {
 }
 
 li#mathExplained {
-  color: gray; /* blue */
+  color: gray;
   font-size: 15px;
+}
+
+a {
+  font-size: 18px;
+  color: #1A5276; /* title blue */
+}
+
+p {
+  padding-bottom: 5px;
 }
