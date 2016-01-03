@@ -1,42 +1,48 @@
-d3.select("div#viz").append("svg")
+/* define some global attributes */
+var numMath = 5
+var numRequired = 11
+var numLower = 2
+var num100 = 3
+var num101 = 3
+var num102 = 3
+var numElective = 7
+var numConsulting = 2
+var smallRadius = 14
+var bigRadius = 22
+var reqRadius = 16
+var mathColor = "#7DCEA0"
+var reqColor = "#CD6155"
+var electiveColor = "#E6B0AA"
+var consultingColor = "#EB984E"
+var transitionInDuration = 250
+var transitionOutDuration = 150
+var categoryFont = "18px"
+var clicked = 0
 
+/* create 2 svg elements */
+d3.select("div#classViz").append("svg").attr("id", "classViz")
+d3.select("div#reqViz").append("svg").attr("id", "reqViz")
+
+/* load data and create viz-es */
 queue()
   .defer(d3.json, "Data/classes.json")
   .defer(d3.csv, "Data/relations.csv")
-  .await(function(error, classes, relations) { dataViz(classes, relations) });
+  .await(function(error, classes, relations) {
+           classesViz(classes, relations)
+           reqsViz()
+         })
 
 
-function dataViz(classes, relations) {
+function classesViz(classes, relations) {
 
-  /* define some attributes */
-  var numMath = 5
-  var numRequired = 11
-  var numLower = 2
-  var num100 = 3
-  var num101 = 3
-  var num102 = 3
-  var numElective = 7
-  var numConsulting = 2
-  var smallRadius = 14
-  var bigRadius = 22
-  var reqRadius = 16
-  var majorY = 750 // where to place major reqs
-  var mathColor = "#7DCEA0"
-  var reqColor = "#CD6155"
-  var electiveColor = "#E6B0AA"
-  var consultingColor = "#EB984E"
-  var transitionInDuration = 250
-  var transitionOutDuration = 150
-  var categoryFont = "18px"
   // set positions
   var mathX = 150 // where to place math classes
   var firstY = 150 // where to place the first row of vertical classes
   var smallVerticalGap = 45 // vertical gap between math classes
   var bigVerticalGap = 70 // vertical gap between other classes
-  var horizontalX = 200 // where to place the first column of horizontal classes
+  var horizontalX = 250 // where to place the first column of horizontal classes
   var horizontalY = 450 // where to place elective classes
   var horizontalGap = 80 // horizontal gap
-  var reqGap = 70 // gap between major and minor reqs
   var quarterX = 870 // where to place quarter selectors
   var quarterY = 50
 
@@ -44,7 +50,7 @@ function dataViz(classes, relations) {
   setPositions(classes)
 
   /* create a g element for each class */
-  var classG = d3.select("svg")
+  var classG = d3.select("svg#classViz")
                .selectAll("g#classes")
                .data(classes)
                .enter()
@@ -55,7 +61,7 @@ function dataViz(classes, relations) {
                                   })
 
   /* create a g element to place quarter selectors */
-  var quarterG = d3.select("svg")
+  var quarterG = d3.select("svg#classViz")
                    .data(classes)
                    .append("g")
                    .attr("transform", "translate(" + quarterX + "," + quarterY + ")")
@@ -87,6 +93,12 @@ function dataViz(classes, relations) {
                        })
                     .on("mouseover", mouseoverClass)
                     .on("mouseout", function(d, i) { mouseOut(d, i, "class") })
+                    .on("click", function(d, i) {
+                                   clicked++
+                                   if (clicked === 2) {
+                                     mouseOut(d, i, "class")
+                                   }
+                                 })
 
   /* create a label for each class */
   classG.append("text")
@@ -163,29 +175,6 @@ function dataViz(classes, relations) {
   .attr("id", "categoryLabels")
   .text("Consulting")
   .style("font-size", categoryFont)
-
-  /* create visuals of major and minor requirements */
-  var majorReqG = d3.select("svg")
-                    .append("g")
-                    .attr("transform", "translate(0," + majorY + ")")
-  var minorReqG = d3.select("svg")
-                    .append("g")
-                    .attr("transform", "translate(0," + parseInt(majorY + reqGap) + ")")
-
-  makeReqsViz(majorReqG, 5, 11, 2, 2)
-  makeReqsViz(minorReqG, 5, 8, 1, 0)
-
-  majorReqG.append("text")
-          .text("Major")
-          .attr("x", 50)
-          .attr("y", 5)
-          .attr("class", "majorMinor")
-
-  minorReqG.append("text")
-          .text("Minor")
-          .attr("x", 50)
-          .attr("y", 5)
-          .attr("class", "majorMinor")
 
   /* create quarter selectors */
   quarterG.append("text").attr("x", 0).attr("y", 0).attr("class", "selected").attr("id", "all")
@@ -283,54 +272,6 @@ function dataViz(classes, relations) {
     return links
   }
 
-  /* implement: create visuals of major and minor requirements */
-  function makeReqsViz(G, numMath, numRequired, numElective, numConsulting) {
-    for (var i = 0; i < numMath; i++) {
-      G.append("circle")
-               .attr("id", "mathreq" + (i+1))
-               .attr("r", reqRadius)
-               .attr("cx", 150 + i*2.3*reqRadius)
-               .attr("cy", 0)
-               .style("fill", mathColor)
-    }
-    for (var i = 0; i < numRequired; i++) {
-      G.append("circle")
-               .attr("id", "req" + (i+1))
-               .attr("r", reqRadius)
-               .attr("cx", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
-               .attr("cy", 0)
-               .style("fill", reqColor)
-      if (i == (numRequired-1)) {
-        G.append("text")
-         .attr("class", "reqNumLabel")
-         .attr("x", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
-         .attr("dx", function(d) { return numRequired >= 10 ?
-                                            (-1/2*numRequired) :
-                                            (-1/2.5*numRequired)
-                                 })
-         .attr("y", -20)
-         .text(numRequired)
-      }
-    }
-
-    for (var i = 0; i < numElective; i++) {
-      G.append("circle")
-               .attr("id", "electivereq" + (i+1))
-               .attr("r", reqRadius)
-               .attr("cx", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (i*2.3*reqRadius))
-               .attr("cy", 0)
-               .style("fill", electiveColor)
-    }
-    for (var i = 0; i < numConsulting; i++) {
-      majorReqG.append("circle")
-               .attr("id", "consultingreq" + (i+1))
-               .attr("r", reqRadius)
-               .attr("cx", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (numElective*2.3*reqRadius) + (i*2.3*reqRadius))
-               .attr("cy", 0)
-               .style("fill", consultingColor)
-    }
-  }
-
   /* implement: create animation when mouse is over a class */
   function mouseoverClass(d, i) {
     var links = getRelations(d, i)
@@ -420,7 +361,7 @@ function dataViz(classes, relations) {
       .duration(transitionInDuration)
       .style("opacity", 0)
 
-    d3.select("svg")
+    d3.select("svg#classViz")
       .append("g")
       .attr("id", "info")
       .attr("transform", "translate(0, 0)")
@@ -490,6 +431,85 @@ function dataViz(classes, relations) {
                 .transition()
                 .duration(transitionInDuration)
                 .style("opacity", 0)
+    }
+  }
+
+}
+
+function reqsViz() {
+
+  var majorY = 50 // where to place major reqs
+  var reqGap = 70 // gap between major and minor reqs
+
+  /* create visuals of major and minor requirements */
+  var majorReqG = d3.select("svg#reqViz")
+                    .append("g")
+                    .attr("transform", "translate(0," + majorY + ")")
+  var minorReqG = d3.select("svg#reqViz")
+                    .append("g")
+                    .attr("transform", "translate(0," + parseInt(majorY + reqGap) + ")")
+
+  makeReqsViz(majorReqG, 5, 11, 2, 2)
+  makeReqsViz(minorReqG, 5, 8, 1, 0)
+
+  majorReqG.append("text")
+          .text("Major")
+          .attr("x", 50)
+          .attr("y", 5)
+          .attr("class", "majorMinor")
+
+  minorReqG.append("text")
+          .text("Minor")
+          .attr("x", 50)
+          .attr("y", 5)
+          .attr("class", "majorMinor")
+
+  /* implement: create visuals of major and minor requirements */
+  function makeReqsViz(G, numMath, numRequired, numElective, numConsulting) {
+
+    for (var i = 0; i < numMath; i++) {
+      G.append("circle")
+               .attr("id", "mathreq" + (i+1))
+               .attr("r", reqRadius)
+               .attr("cx", 150 + i*2.3*reqRadius)
+               .attr("cy", 0)
+               .style("fill", mathColor)
+    }
+    for (var i = 0; i < numRequired; i++) {
+      G.append("circle")
+               .attr("id", "req" + (i+1))
+               .attr("r", reqRadius)
+               .attr("cx", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
+               .attr("cy", 0)
+               .style("fill", reqColor)
+      if (i == (numRequired-1)) {
+        G.append("text")
+         .attr("class", "reqNumLabel")
+         .attr("x", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
+         .attr("dx", function(d) { return numRequired >= 10 ?
+                                            (-1/2*numRequired) :
+                                            (-1/2.5*numRequired)
+                                 })
+         .attr("y", -20)
+         .text(numRequired)
+      }
+    }
+
+    for (var i = 0; i < numElective; i++) {
+      G.append("circle")
+               .attr("id", "electivereq" + (i+1))
+               .attr("r", reqRadius)
+               .attr("cx", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (i*2.3*reqRadius))
+               .attr("cy", 0)
+               .style("fill", electiveColor)
+    }
+    for (var i = 0; i < numConsulting; i++) {
+      majorReqG.append("circle")
+               .attr("id", "consultingreq" + (i+1))
+               .attr("r", reqRadius)
+               .attr("cx", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (numElective*2.3*reqRadius) + (i*2.3*reqRadius))
+               .attr("cy", 0)
+               .style("fill", consultingColor)
     }
   }
 

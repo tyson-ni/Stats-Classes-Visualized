@@ -11,20 +11,22 @@
 
 
 <body>
-  <h1>Pick Your Stats ...</h1>
-  <h2>An interactive overview of the Stats program @ UCLA</h2>
+  <h1> Pick Your Stats ... </h1>
 
-  <div id="viz">
+  <div id="classViz" class="container">
+    <h2> An interactive overview of the Stats program @ UCLA </h2>
   </div>
-  <script src="Scripts/viz.js"></script>
 
   <div id="programInfo" class="container">
 
     <h2 class="requirements"> Navigating the Stats program </h2>
 
+    <div id="reqViz">
+    </div>
+
     <div class="row requirements">
-      <div class="col-md-6">
-        <h3><strong >Major: </strong></h3>
+      <div class="col-xs-6">
+        <h3><strong >Major </strong></h3>
         <ul>
           <li>Math 31 AB, 32 AB & 33 A</li>
           <li>Stats 10</li>
@@ -36,8 +38,8 @@
           <li>2 Consulting: Stats 140SL & 141SL</li>
         </ul>
       </div>
-      <div class="col-md-6">
-        <h3><strong>Minor:</strong></h3>
+      <div class="col-xs-6">
+        <h3><strong> Minor </strong></h3>
         <ul>
           <li> Math 31B </li>
             <ul>
@@ -54,19 +56,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <h3><strong>Electives Explained:</strong></h3>
+      <div class="col-xs-12">
+        <h3><strong> Electives Explained </strong></h3>
           <ul>
-            <li> Pick any upper division stats class </li>
+            <li> Pick any upper div stats class </li>
             <li> These classes can also be selected: Math 131A, 131B, 151A, 151B, 170B, 171, 172A, 172B </li>
-            <li> Stats 105 & 189 do not count </li>
+            <li> Stats 105 & 189 don't count </li>
           </ul>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <h3><strong>Recommended classes for students planning to study stats in grad school:</strong></h3>
+      <div class="col-xs-12">
+        <h3><strong> Recommended classes for students planning to study stats in grad school </strong></h3>
           <ul>
             <li> Math 131A, 131B, 151A, 151B, 170B, 171 </li>
           </ul>
@@ -74,13 +76,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <h3><strong> Official references: </strong></h3>
+      <div class="col-xs-12">
+        <h3><strong> Useful Links </strong></h3>
+          <p> <a href="http://www.registrar.ucla.edu/schedule/catalog.aspx?sa=STATS++&funsel=3"> List of stats classes </a> </p>
+          <p> <a href="http://statistics.ucla.edu/undergraduate-program/statistics-major"> Major requirements </a> </p>
+          <p> <a href="http://statistics.ucla.edu/undergraduate-program/statistics-minor"> Minor  requirements </a> </p>
+          <p> <a href="Data/OfficialPreReqs.pdf"> Official list of upper div prerequisites </a> </p>
       </div>
     </div>
 
   </div>
 
 </body>
+
+<script src="Scripts/viz.js"></script>
 
 </html>
