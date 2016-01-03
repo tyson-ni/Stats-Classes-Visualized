@@ -97,6 +97,7 @@ function classesViz(classes, relations) {
                                    clicked++
                                    if (clicked === 2) {
                                      mouseOut(d, i, "class")
+                                     clicked = 0
                                    }
                                  })
 
