@@ -43,7 +43,7 @@ function classesViz(classes, relations) {
   var horizontalX = 250 // where to place the first column of horizontal classes
   var horizontalY = 450 // where to place elective classes
   var horizontalGap = 80 // horizontal gap
-  var quarterX = 870 // where to place quarter selectors
+  var quarterX = 860 // where to place quarter selectors
   var quarterY = 50
 
   /* determine where to place each class */
@@ -91,11 +91,13 @@ function classesViz(classes, relations) {
                            return reqColor
                          }
                        })
-                    .on("mouseover", mouseoverClass)
+                    .on("mouseover", pickClass)
                     .on("mouseout", function(d, i) { mouseOut(d, i, "class") })
                     .on("click", function(d, i) {
                                    clicked++
-                                   if (clicked === 2) {
+                                   if (clicked === 1) {
+                                     pickClass(d, i)
+                                   } else if (clicked === 2) {
                                      mouseOut(d, i, "class")
                                      clicked = 0
                                    }
@@ -274,7 +276,7 @@ function classesViz(classes, relations) {
   }
 
   /* implement: create animation when mouse is over a class */
-  function mouseoverClass(d, i) {
+  function pickClass(d, i) {
     var links = getRelations(d, i)
     var linksCount = links.length
     var selectSelf = classG.filter(function(p) { return p.class === d.class })

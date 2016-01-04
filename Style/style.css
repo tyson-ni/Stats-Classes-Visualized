@@ -19,11 +19,11 @@ h1 {
 }
 
 h2 {
-  font-size: 32px;
-  margin-left: 50px;
+  font-size: 28px;
   margin-top: 15px;
   margin-bottom: 30px;
   color: #1A5276; /* title blue */
+  text-align: center;
 }
 
 
@@ -71,25 +71,21 @@ text.notSelected {
 
 text.selected {
   fill: #2E86C1; /* blue */
-  font-size: 26px;
+  font-size: 23px;
 }
 
 text.info_name {
   fill: #2E86C1; /* blue */
-  font-size: 30px;
+  font-size: 28px;
 }
 
 text.info_req {
   fill: gray;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 text.reqNumLabel {
   font-size: 12px;
-}
-
-h2.requirements {
-  padding-top: 40px;
 }
 
 div.row {
@@ -102,6 +98,16 @@ div.requirements {
   padding-top: 20px;
 }
 
+h2.requirements {
+  padding-top: 70px;
+}
+
+h3#note {
+  font-size: 15px;
+  color: #784212; /* brown */
+  text-align: center;
+}
+
 
 ul {
   font-size: 20px;
@@ -112,13 +118,17 @@ li {
 }
 
 li#mathExplained {
-  color: gray;
+  color: #784212; /* brown */
   font-size: 15px;
 }
 
 a {
   font-size: 18px;
   color: #1A5276; /* title blue */
+}
+
+a.note {
+  font-size: inherit;
 }
 
 p {
