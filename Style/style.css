@@ -103,6 +103,7 @@ h2.requirements {
 }
 
 h3#note {
+  margin-top: 60px;
   font-size: 15px;
   color: #784212; /* brown */
   text-align: center;
@@ -117,7 +118,7 @@ li {
   padding-bottom: 5px;
 }
 
-li#mathExplained {
+li.classNote {
   color: #784212; /* brown */
   font-size: 15px;
 }

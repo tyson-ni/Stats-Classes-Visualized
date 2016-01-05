@@ -1,3 +1,4 @@
+
 /* define some global attributes */
 var numMath = 5
 var numRequired = 11
@@ -453,7 +454,7 @@ function reqsViz() {
                     .attr("transform", "translate(0," + parseInt(majorY + reqGap) + ")")
 
   makeReqsViz(majorReqG, 5, 11, 2, 2)
-  makeReqsViz(minorReqG, 5, 8, 1, 0)
+  makeReqsViz(minorReqG, 5, 7, 1, 0)
 
   majorReqG.append("text")
           .text("Major")
@@ -477,7 +478,18 @@ function reqsViz() {
                .attr("cx", 150 + i*2.3*reqRadius)
                .attr("cy", 0)
                .style("fill", mathColor)
+     if (i == (numMath-1)) {
+       G.append("text")
+        .attr("class", "reqNumLabel")
+        .attr("x", 150 + i*2.3*reqRadius)
+        .attr("dx", function(d) { return numMath >= 10 ?
+                                           -6 : -4
+                                })
+        .attr("y", -20)
+        .text(numMath)
+     }
     }
+
     for (var i = 0; i < numRequired; i++) {
       G.append("circle")
                .attr("id", "req" + (i+1))
@@ -490,8 +502,7 @@ function reqsViz() {
          .attr("class", "reqNumLabel")
          .attr("x", (150 + numMath*2.3*reqRadius) + (i*2.3*reqRadius))
          .attr("dx", function(d) { return numRequired >= 10 ?
-                                            (-1/2*numRequired) :
-                                            (-1/2.5*numRequired)
+                                            -6 : -4
                                  })
          .attr("y", -20)
          .text(numRequired)
@@ -505,7 +516,19 @@ function reqsViz() {
                .attr("cx", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (i*2.3*reqRadius))
                .attr("cy", 0)
                .style("fill", electiveColor)
+
+     if (i == (numElective-1)) {
+       G.append("text")
+        .attr("class", "reqNumLabel")
+        .attr("x", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (i*2.3*reqRadius))
+        .attr("dx", function(d) { return numElective >= 10 ?
+                                           -6 : -4
+                                })
+        .attr("y", -20)
+        .text(numElective)
+     }
     }
+
     for (var i = 0; i < numConsulting; i++) {
       majorReqG.append("circle")
                .attr("id", "consultingreq" + (i+1))
@@ -513,6 +536,16 @@ function reqsViz() {
                .attr("cx", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (numElective*2.3*reqRadius) + (i*2.3*reqRadius))
                .attr("cy", 0)
                .style("fill", consultingColor)
+     if (i == (numElective-1)) {
+       G.append("text")
+        .attr("class", "reqNumLabel")
+        .attr("x", (150 + numMath*2.3*reqRadius) + (numRequired*2.3*reqRadius) + (numElective*2.3*reqRadius) + (i*2.3*reqRadius))
+        .attr("dx", function(d) { return numConsulting >= 10 ?
+                                           -6 : -4
+                                })
+        .attr("y", -20)
+        .text(numConsulting)
+     }
     }
   }
 
