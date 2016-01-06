@@ -11,10 +11,8 @@ body {
 }
 
 h1 {
-  font-size: 55px;
-  margin-left: 70px;
-  margin-top: 25px;
-  margin-bottom: 10px;
+  font-size: 60px;
+  text-align: center;
   color: #CD6155; /* stats red */
 }
 
@@ -42,7 +40,7 @@ svg {
 
 svg#classViz {
   height: 650px;
-  background-color: #fffff6; /* off white */
+  background-color: #fffff7; /* off white */
 }
 
 svg#reqViz {
