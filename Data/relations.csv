@@ -12,6 +12,7 @@ Stats 100A,Stats 100B,Enforced
 Stats 100B,Stats 100C,Enforced
 Stats 10,Stats 101A,Enforced
 Stats 101A,Stats 101B,Enforced
+Stats 101B,Stats 101C,Enforced
 Math 33A,Stats 102A,Enforced
 Stats 10,Stats 102A,Enforced
 Math 33A,Stats 102B,Enforced

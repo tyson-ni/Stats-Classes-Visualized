@@ -13,7 +13,9 @@
 
 
 <body>
-  <h1> Pick Your Stats ... </h1>
+  <div id="title" class="container">
+    <h1> Pick Your Stats </h1>
+  </div>
 
   <div id="classViz" class="container">
     <h2> An interactive guide to UCLA Stats </h2>
@@ -30,11 +32,11 @@
       <div class="col-md-6">
         <h3><strong >Major </strong></h3>
         <ul>
-          <li>Math 31 AB, 32 AB & 33 A</li>
-          <li>Stats 10, Stats 20</li>
-          <li>Stats 100 ABC, 101 ABC & 102 ABC</li>
-          <li>2 Electives</li>
-          <li>2 Consulting: Stats 140SL & 141SL</li>
+          <li class="math">Math 31 AB, 32 AB & 33 A</li>
+          <li class="core">Stats 10 & 20</li>
+          <li class="core">Stats 100 ABC, 101 ABC & 102 ABC</li>
+          <li class="elective">2 Electives</li>
+          <li class="consulting">2 Consulting: Stats 140SL & 141SL</li>
             <ul>
               <li class="classNote"> Stats 130 is a prereq for 140SL. It's essentially a required class for the major program. </li>
             </ul>
@@ -43,17 +45,17 @@
       <div class="col-md-6">
         <h3><strong> Minor </strong></h3>
         <ul>
-          <li> Math 31B </li>
+          <li class="math"> Math 31B </li>
             <ul>
               <li class="classNote"> In reality, other math classes are necessary since they are the prereqs for many upper div classes </li>
             </ul>
-          <li> Stats 10 </li>
-          <li >6 classes from 100, 101 or 102 sequences </li>
+          <li class="core"> Stats 10 </li>
+          <li class="core"> 6 classes from 100, 101 or 102 sequences </li>
             <ul>
               <li> Option I: Pick any 2 sequences </li>
               <li> Option II: Pick 2 classes from each sequence </li>
             </ul>
-          <li>1 Elective</li>
+          <li class="elective"> 1 Elective </li>
         </ul>
       </div>
     </div>
@@ -90,7 +92,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h3 id="note"> Last updated on <strong>January 3, 2016</strong> <br><br>
+        <h3 id="note"> Last updated on <strong>January 5, 2016</strong> <br><br>
            Please refer to the <a class="note" href="http://www.registrar.ucla.edu/schedule/schedulehome.aspx">official UCLA version</a> when multiple sources provide conflicting info <br><br>
            Please report any inaccuracies or bugs to <strong>tni@ucla.edu !</strong> <br><br>
            All of the data & spaghetti code used to create this site can be found on <a class="note" href="https://github.com/tyson-ni/Stats-Classes-Visualized">Github</a> <br><br>
