@@ -454,7 +454,7 @@ function reqsViz() {
                     .attr("transform", "translate(0," + parseInt(majorY + reqGap) + ")")
 
   makeReqsViz(majorReqG, 5, 11, 2, 2)
-  makeReqsViz(minorReqG, 5, 7, 1, 0)
+  makeReqsViz(minorReqG, 5, 8, 1, 0)
 
   majorReqG.append("text")
           .text("Major")
