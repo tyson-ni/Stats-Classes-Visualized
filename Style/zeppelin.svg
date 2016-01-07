@@ -1,0 +1,19 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64px" height="38px" viewBox="0 0 64 38" enable-background="new 0 0 64 38" xml:space="preserve" class="si-duo-zeppelin">
+<title class="">Zeppelin</title>
+
+<g id="Page-1" class="">
+	<g id="Zeppelin" transform="translate(1.000000, 1.000000)" class="">
+		<path id="Shape" fill="none" stroke="#1396D7" stroke-width="2" d="M60,19.999V28h-4l-3-3" class="si-duo-zeppelin-rudder si-duo-zeppelin-stroke si-duo-zeppelin-accent si-duo-stroke si-duo-accent" style=""></path>
+		<path id="Shape_1_" fill="none" stroke="#1396D7" stroke-width="2" d="M53,4.995L56,2h4v7.996" class="si-duo-zeppelin-rudder si-duo-zeppelin-stroke si-duo-zeppelin-accent si-duo-stroke si-duo-accent" style=""></path>
+		<path id="Shape_2_" fill="none" stroke="#6D6E71" stroke-width="2" d="M43,29v7H19v-7" class="si-duo-zeppelin-gondola si-duo-zeppelin-stroke si-duo-zeppelin-base si-duo-stroke si-duo-base" style=""></path>
+		
+			<ellipse id="Oval_1_" fill="none" stroke="#6D6E71" stroke-width="2" cx="31" cy="15" rx="31" ry="15" class="si-duo-zeppelin-main si-duo-zeppelin-stroke si-duo-zeppelin-base si-duo-stroke si-duo-base" style="">
+		</ellipse>
+		<ellipse id="Oval" fill="none" stroke="#1396D7" stroke-width="2" cx="31" cy="15" rx="31" ry="7" class="si-duo-zeppelin-main si-duo-zeppelin-stroke si-duo-zeppelin-accent si-duo-stroke si-duo-accent" style="">
+		</ellipse>
+	</g>
+</g>
+</svg>
