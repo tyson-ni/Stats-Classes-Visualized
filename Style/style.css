@@ -3,11 +3,11 @@
 body {
   margin-left: 50px;
   margin-right: 50px;
-  margin-bottom: 50px;
   background-color: white;
   color: #111;
   font-family: PT Sans, Arial, sans-serif;
   font-weight: normal;
+  line-height: 40px;
 }
 
 h1 {
@@ -100,25 +100,27 @@ h2.requirements {
   padding-top: 70px;
 }
 
+h3 {
+  font-size: 24px;
+}
+
 h3#note {
   margin-top: 60px;
   font-size: 15px;
   color: #784212; /* brown */
   text-align: center;
+  line-height: 30px;
 }
 
 
 ul {
-  font-size: 20px;
-}
-
-li {
-  padding-bottom: 5px;
+  font-size: 18px;
 }
 
 li.classNote {
   color: #784212; /* brown */
   font-size: 15px;
+  line-height: 25px;
 }
 
 a {
@@ -130,6 +132,11 @@ a.note {
   font-size: inherit;
 }
 
-p {
-  padding-bottom: 5px;
+a#syllabus {
+  font-size: 20px;
+}
+
+p#syllabus {
+  font-size: 18px;
+  padding-left: 30px;
 }
