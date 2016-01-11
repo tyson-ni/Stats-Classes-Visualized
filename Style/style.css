@@ -112,6 +112,11 @@ h3#note {
   line-height: 30px;
 }
 
+h3#saveImage {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 20px;
+}
 
 ul {
   font-size: 18px;
@@ -128,7 +133,7 @@ a {
   color: #1A5276; /* title blue */
 }
 
-a.note {
+a.note, a#saveImage {
   font-size: inherit;
 }
 
@@ -138,5 +143,5 @@ a#syllabus {
 
 p#syllabus {
   font-size: 18px;
-  padding-left: 30px;
+  padding-left: 5px;
 }
