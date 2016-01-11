@@ -115,7 +115,7 @@ function classesViz(classes, relations) {
                    })
         .attr("y", function(d) {
                      if (d.category !== "Elective" && d.category !== "Consulting") {
-                       return 0
+                       return 0.1*bigRadius
                      } else {
                        return 2*bigRadius
                      }
