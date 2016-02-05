@@ -39,7 +39,7 @@
     "category": "Elective", "abbrev": "C155" },
   { "class": "Stats C161", "name": "Intro to Pattern Recognition and Machine Learning", "term": 3,
     "category": "Elective", "abbrev": "C161" },
-  { "class": "Stats 170", "name": "Intro to Time Series Analysis", "term": 3,
+  { "class": "Stats 170", "name": "Intro to Time Series Analysis", "term": -1,
     "category": "Elective", "abbrev": "170" },
   { "class": "Stats C180", "name": "Intro to Bayesian Stats", "term": 2,
     "category": "Elective", "abbrev": "C180" },
