@@ -8,3 +8,4 @@
 7: Winter, Spring
 8: Fall, Winter, Summer
 9: Fall, Spring, Summer
+-1: No longer offered
